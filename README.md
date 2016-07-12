@@ -54,13 +54,12 @@ id=of:00000000000000b1, available=true, role=MASTER, type=SWITCH, mfr=Nicira, In
 If any port number does not match to the ones in `vrouter.json`, modify the config file with the correct port numbers.
 * port number of `quagga` -> `controlPlaneConnectPoint` of router config
 * port number of `veth1` (set via `uplinkPort` field in `sona.json`) -> listed in `ports`
-* port number of `patch-rout` -> `hosts`
 Once you modify `vrouter.json`, re-run the ONOS-vRouter.
 ```
 $ vrouter.sh 172.17.0.3
 ```
 
-If everything's right, check `fpm-connections`, `hosts` and `routes`. `172.18.0.1` is the external default gateway in this example.
+If everything's right, check `fpm-connections`, `hosts` and `routes`. `172.18.0.1` is the external default gateway in this example. The host with IP address `192.168.0.1` is for the internal network which will explain later.
 ```
 onos> hosts
 id=FA:00:00:00:00:01/None, mac=FA:00:00:00:00:01, location=of:00000000000000b1/2, vlan=None, ip(s)=[172.18.0.1]
@@ -82,4 +81,41 @@ Table: ipv4
 Table: ipv6
    Network            Next Hop
    Total: 0
+```
+**Register internal network**<br>
+Now let's add routes for the internal network, `192.168.0.0/24` in this example. Firts, define fake host of the internal network gateway in the network config file and push it to the `ONOS-vRouter` (or you can re-run `ONOS-vRouter`). The port number in the `location` field should equal to the port number of `patch-rout`. (You don't need to do it again if the host already exists)
+```
+    "hosts" : {
+        "fe:00:00:00:00:02/-1" : {
+            "basic": {
+                "ips": ["192.168.0.1"],
+                "location": "of:00000000000000b1/1"
+            }
+        }
+    }
+
+# push network config
+$ curl --user onos:rocks -X POST http://172.17.0.3:8181/onos/v1/network/configuration -d @vrouter.json
+
+# or simply re-run the container
+$ ./vrouter.sh 172.17.0.3
+```
+Add route.
+```
+onos> route-add 192.168.0.0/24 192.168.0.1
+
+onos> routes
+Table: ipv4
+   Network            Next Hop
+   0.0.0.0/0          172.18.0.1
+   192.168.0.0/24     192.168.0.1
+   Total: 2
+
+Table: ipv6
+   Network            Next Hop
+   Total: 0
+   
+onos> next-hops
+ip=172.18.0.1, mac=FA:00:00:00:00:01, numRoutes=1
+ip=192.168.0.1, mac=FE:00:00:00:00:02, numRoutes=1
 ```
