@@ -74,8 +74,7 @@ Table: ipv6
    Network            Next Hop
    Total: 0
 ```
-<br><br>
-**External Router**<br>
+<br>**External Router**<br>
 If you have external router advertising the default originate, you should pass an additional argument when you create a quagga container.
 ```
 $ ./quagga.sh --name=gateway-01 --ip=172.18.0.254/24 --mac=fe:00:00:00:00:01 --default=false
