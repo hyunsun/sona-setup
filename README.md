@@ -75,9 +75,9 @@ Table: ipv6
    Total: 0
 ```
 <br>**External Router**<br>
-If you have external router advertising the default originate, you should pass an additional argument when you create a quagga container.
+If you have external router advertising the default originate, you should pass an additional argument `--no-default` when you create a quagga container.
 ```
-$ ./quagga.sh --name=gateway-01 --ip=172.18.0.254/24 --mac=fe:00:00:00:00:01 --default=false
+$ ./quagga.sh --name=gateway-01 --ip=172.18.0.254/24 --mac=fe:00:00:00:00:01 --no-default
 ```
 Check `fpm-connections`, `hosts` and `routes`. `172.18.0.1` is the external router in this example.
 ```
