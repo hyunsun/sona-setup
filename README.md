@@ -28,8 +28,14 @@ Total 4 nodes
 ```
 
 # vRouter ONOS setup
-Prepare network configuration file for vRouter with external connection information. There is an example named with `vrouter.json` in this repository. Refer to the ONOS wiki for the details about vRouter application(https://wiki.onosproject.org/display/ONOS/vRouter) and modify the file as you want. Now run `vrouter.sh` script with the `routerController` address in `sona.json`. 
+If you don't have external router, refer to this link(https://github.com/hyunsun/documentations/wiki/Quagga-with-Docker-and-Open-vSwitch) and prepare the simulated external router.
+Now modify `quagga/zebra.conf` and `quagga/bgpd.conf`. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`. Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and MAC address. This MAC address will be used in `vrouter.json` later.
 ```
-$ vrouter.sh 172.17.0.2
+$ ./quagga.sh gateway-01 172.18.0.254/24 fe:00:00:00:00:01
+```
+
+Prepare network configuration file for vRouter with external connection information. There is an example named with `vrouter.json` in this repository. Refer to the ONOS wiki for the details about vRouter application(https://wiki.onosproject.org/display/ONOS/vRouter) and modify the file as you want. Now run `vrouter.sh` script with the `routerController` address in `sona.json`.
+```
+$ vrouter.sh 172.17.0.3
 ```
 Check `fpm-connections`, `hosts`, and `devices`.
