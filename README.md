@@ -10,12 +10,12 @@ SONA gateway node is composed of a couple of bridge controlled by `SONA ONOS` an
 Prepare the network configuration file for SONA with the information about compute and gateway nodes. There is an example named with `sona.json` in this repository. Now activate SONA applications and push the network configuration file to running ONOS.<br>Note that `routerController` field will be used to bring up `vRouter ONOS` later. This address does not span gateway nodes, that is, you can use the same address in multiple gateway nodes.
 ```
 # activate applications
-$ curl --user onos:rocks -X POST http://onos:8181/onos/v1/applications/org.onosproject.drivers/active
-$ curl --user onos:rocks -X POST http://onos:8181/onos/v1/applications/org.onosproject.openflow/active
-$ curl --user onos:rocks -X POST http://onos:8181/onos/v1/applications/org.onosproject.networking/active
+$ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.drivers/active
+$ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.openflow/active
+$ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.networking/active
 
 # push network config
-$ curl --user onos:rocks -X POST -H "Content-Type: application/json" http://onos:8181/onos/v1/network/configuration/ -d @sona.json
+$ curl --user onos:rocks -X POST -H "Content-Type: application/json" http://onos_ip:8181/onos/v1/network/configuration/ -d @sona.json
 ```
 Check the nodes states are `COMPLETE`. Use `openstack-node-check` command for more detailed states of the node. Pushing network configuration triggers reinitialize the nodes. It's no harm to reinitialize COMPLETE state node. If you want to reinitialize a particular compute node, use `openstack-node-init` command with hostname.
 ```
