@@ -7,7 +7,7 @@ SONA gateway node is composed of a couple of bridge controlled by `SONA ONOS` an
 ![](https://66.media.tumblr.com/f41999bd5184bbdb437071981e0d6379/tumblr_oa7tlwI2nz1s0jpjfo1_1280.png)
 
 # SONA ONOS setup
-Prepare the network configuration file for SONA with information about compute and gateway nodes. There is an example named with `sona.json` in this repository. Activate SONA applications and push the network configuration file to running ONOS. Note that `routerController` field in each gateway node will be used to bring up vRouter ONOS later. This address does not span gateway nodes so you can use the same address for all gateways.
+Prepare the network configuration file for SONA with information about compute and gateway nodes. There is an example named with `sona.json` in this repository. Activate SONA applications and push the network configuration file to running ONOS. Note that `routerController` field will be used to bring up `vRouter ONOS` later. This address does not span gateway nodes, that is, you can use the same address in multiple gateway nodes.
 ```
 # activate applications
 $ curl --user onos:rocks -X POST http://onos:8181/onos/v1/applications/org.onosproject.drivers/active
@@ -28,13 +28,14 @@ Total 4 nodes
 ```
 
 # vRouter ONOS setup
-If you don't have external router, refer to this link(https://github.com/hyunsun/documentations/wiki/Quagga-with-Docker-and-Open-vSwitch) and prepare the simulated external router.
-Now modify `quagga/zebra.conf` and `quagga/bgpd.conf`. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`. Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and MAC address. This MAC address will be used in `vrouter.json` later.
+##Quagga##<br>Modify `quagga/zebra.conf` and `quagga/bgpd.conf`. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`. Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and MAC address. This MAC address will be used in `vrouter.json` later.
 ```
 $ ./quagga.sh gateway-01 172.18.0.254/24 fe:00:00:00:00:01
 ```
-
-Prepare network configuration file for vRouter with external connection information. There is an example named with `vrouter.json` in this repository. Refer to the ONOS wiki for the details about vRouter application(https://wiki.onosproject.org/display/ONOS/vRouter) and modify the file as you want. Now run `vrouter.sh` script with the `routerController` address in `sona.json`.
+If you check the result of `ovs-vsctl show`, there should be a new port named `quagga` on `br-router` bridge.
+<br><br>
+##vRouter ONOS##<br>
+Prepare network configuration file for vRouter with external connection information. There is an example named with `vrouter.json` in this repository. Refer to the ONOS wiki for the details about vRouter application(https://wiki.onosproject.org/display/ONOS/vRouter) and modify the file as you want. Now run `vrouter.sh` script with the `routerController` IP address. The same command can be used to rebuild the container.
 ```
 $ vrouter.sh 172.17.0.3
 ```
