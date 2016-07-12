@@ -59,35 +59,19 @@ Once you modify `vrouter.json`, re-run the ONOS-vRouter.
 ```
 $ vrouter.sh 172.17.0.3
 ```
-Once everything goes well, add the default route.
-```
-onos> route-add 0.0.0.0/0 172.18.0.254
-onos> next-hops
-ip=172.18.0.254, mac=FE:00:00:00:00:01, numRoutes=1
-onos> routes
-Table: ipv4
-   Network            Next Hop
-   0.0.0.0/0          172.18.0.254
-   Total: 1
 
-Table: ipv6
-   Network            Next Hop
-   Total: 0
+If everything's right, check `fpm-connections`, `hosts` and `routes`. `172.18.0.1` is the external default gateway in this example.
 ```
-<br>**External Router**<br>
-If you have external router advertising the default originate, you should pass an additional argument `--no-default` when you create a quagga container.
-```
-$ ./quagga.sh --name=gateway-01 --ip=172.18.0.254/24 --mac=fe:00:00:00:00:01 --no-default
-```
-Check `fpm-connections`, `hosts` and `routes`. `172.18.0.1` is the external router in this example.
-```
-onos> fpm-connections
-172.17.0.2:52332 connected since 6m ago
-
 onos> hosts
 id=FA:00:00:00:00:01/None, mac=FA:00:00:00:00:01, location=of:00000000000000b1/2, vlan=None, ip(s)=[172.18.0.1]
 id=FE:00:00:00:00:01/None, mac=FE:00:00:00:00:01, location=of:00000000000000b1/12, vlan=None, ip(s)=[172.18.0.254]
 id=FE:00:00:00:00:02/None, mac=FE:00:00:00:00:02, location=of:00000000000000b1/1, vlan=None, ip(s)=[192.168.0.1], name=FE:00:00:00:00:02/None
+
+onos> fpm-connections
+172.17.0.2:52332 connected since 6m ago
+
+onos> next-hops
+ip=172.18.0.1, mac=FA:00:00:00:00:01, numRoutes=1
 
 onos> routes
 Table: ipv4
