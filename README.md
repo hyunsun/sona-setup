@@ -59,7 +59,7 @@ Once you modify `vrouter.json`, re-run the ONOS-vRouter.
 ```
 $ vrouter.sh 172.17.0.3
 ```
-<br><br>Once everything goes well, you should be able to see routes from external router with `routes` command.
+Once everything goes well, you should be able to see routes from external router with `routes` command.
 ```
 onos> routes
 Table: ipv4
