@@ -35,7 +35,7 @@ $ ./quagga.sh gateway-01 172.18.0.254/24 fe:00:00:00:00:01
 If you check the result of `ovs-vsctl show`, there should be a new port named `quagga` on `br-router` bridge.
 <br><br>
 **vRouter ONOS**<br>
-Prepare network configuration file for vRouter with external connection information. There is an example named with `vrouter.json` in this repository. For more details about vRouter, check out https://wiki.onosproject.org/display/ONOS/vRouter.<br>Now run `vrouter.sh` script with the `routerController` IP address. The same command can be used to rebuild the container.
+Prepare network configuration file for vRouter with external connection information. One example is `vrouter.json` in this repository. For more details about vRouter, check out https://wiki.onosproject.org/display/ONOS/vRouter.<br>Now run `vrouter.sh` script with the `routerController` IP address. The same command can be used to rebuild the container.
 ```
 $ vrouter.sh 172.17.0.3
 ```
