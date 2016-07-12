@@ -83,7 +83,7 @@ Table: ipv6
    Total: 0
 ```
 **Register internal network**<br>
-Now let's add routes for the internal network, `192.168.0.0/24` in this example. This network might be the `floating IP` range in Neutron data model.<br>Firts, define fake host of the internal network gateway in the network config file and push it to the `ONOS-vRouter` (or you can re-run `ONOS-vRouter`). The port number in the `location` field should equal to the port number of `patch-rout`. (You don't need to do it again if the host already exists)
+Now let's add routes for the internal network, `192.168.0.0/24` in this example. This network might be the `floating IP` range in Neutron data model.<br>First, define fake host of the internal network gateway in the network config file and push it to the `ONOS-vRouter` (or you can re-run `ONOS-vRouter`). The port number in the `location` field should equal to the port number of `patch-rout`. (You don't need to do it again if the host already exists)
 ```
     "hosts" : {
         "fe:00:00:00:00:02/-1" : {
