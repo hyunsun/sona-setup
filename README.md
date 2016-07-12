@@ -3,7 +3,7 @@ SONA is a project implements OpenStack Neutron ML2 mechanism driver and L3 servi
 Here it describes how to set up a gateway node for SONA. 
 
 # SONA Gateway Node
-SONA gateway node is composed of a couple of bridge controlled by SONA ONOS and vRouter ONOS respectively. SONA ONOS takes care of creating the bridges and patch link between the bridges, and flow rules on the `br-int` bridge. vRouter ONOS, on the other hand, takes care of flow rules on `br-router` and communications with external routers.
+SONA gateway node is composed of a couple of bridge controlled by `SONA ONOS` and `vRouter ONOS` respectively. SONA ONOS takes care of creating the bridges and patch link between the bridges, and flow rules on the `br-int` bridge. vRouter ONOS, on the other hand, takes care of flow rules on `br-router` and communications with external routers.
 ![](https://66.media.tumblr.com/f41999bd5184bbdb437071981e0d6379/tumblr_oa7tlwI2nz1s0jpjfo1_1280.png)
 
 # SONA ONOS setup
