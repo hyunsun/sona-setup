@@ -100,6 +100,11 @@ $ curl --user onos:rocks -X POST http://172.17.0.3:8181/onos/v1/network/configur
 
 # or simply re-run the container
 $ ./vrouter.sh 172.17.0.3
+
+onos> hosts
+id=FA:00:00:00:00:01/None, mac=FA:00:00:00:00:01, location=of:00000000000000b1/2, vlan=None, ip(s)=[172.18.0.1]
+id=FE:00:00:00:00:01/None, mac=FE:00:00:00:00:01, location=of:00000000000000b1/12, vlan=None, ip(s)=[172.18.0.254]
+id=FE:00:00:00:00:02/None, mac=FE:00:00:00:00:02, location=of:00000000000000b1/1, vlan=None, ip(s)=[192.168.0.1], name=FE:00:00:00:00:02/None
 ```
 Add route.
 ```
