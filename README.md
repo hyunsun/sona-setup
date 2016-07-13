@@ -70,8 +70,8 @@ $ vrouter.sh 172.17.0.3
 If everything's right, check `fpm-connections`, `hosts` and `routes`. `172.18.0.1` is the external default gateway in this example. The host with IP address `192.168.0.1` is for the internal network which will explain later.
 ```
 onos> hosts
-id=FA:00:00:00:00:01/None, mac=FA:00:00:00:00:01, location=of:00000000000000b1/2, vlan=None, ip(s)=[172.18.0.1]
-id=FE:00:00:00:00:01/None, mac=FE:00:00:00:00:01, location=of:00000000000000b1/12, vlan=None, ip(s)=[172.18.0.254]
+id=FA:00:00:00:00:01/None, mac=FA:00:00:00:00:01, location=of:00000000000000b1/25, vlan=None, ip(s)=[172.18.0.1]
+id=FE:00:00:00:00:01/None, mac=FE:00:00:00:00:01, location=of:00000000000000b1/24, vlan=None, ip(s)=[172.18.0.254]
 id=FE:00:00:00:00:02/None, mac=FE:00:00:00:00:02, location=of:00000000000000b1/1, vlan=None, ip(s)=[192.168.0.1], name=FE:00:00:00:00:02/None
 
 onos> fpm-connections
@@ -117,8 +117,8 @@ Now let's add routes for the internal network, `192.168.0.0/24` in this example.
 $ ./vrouter.sh 172.17.0.3
 
 onos> hosts
-id=FA:00:00:00:00:01/None, mac=FA:00:00:00:00:01, location=of:00000000000000b1/2, vlan=None, ip(s)=[172.18.0.1]
-id=FE:00:00:00:00:01/None, mac=FE:00:00:00:00:01, location=of:00000000000000b1/12, vlan=None, ip(s)=[172.18.0.254]
+id=FA:00:00:00:00:01/None, mac=FA:00:00:00:00:01, location=of:00000000000000b1/25, vlan=None, ip(s)=[172.18.0.1]
+id=FE:00:00:00:00:01/None, mac=FE:00:00:00:00:01, location=of:00000000000000b1/24, vlan=None, ip(s)=[172.18.0.254]
 id=FE:00:00:00:00:02/None, mac=FE:00:00:00:00:02, location=of:00000000000000b1/1, vlan=None, ip(s)=[192.168.0.1], name=FE:00:00:00:00:02/None
 ```
 Add route.
