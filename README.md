@@ -39,7 +39,7 @@ If there's no external router in your setup, add another quagga container in eca
 ```
 $ ./quagga.sh --name=router-01 --ip=172.18.0.1/24 --mac=fa:00:00:00:00:01 --external-router
 ```
-<br><br>
+<br>
 **vRouter ONOS**<br>
 Prepare network configuration file for vRouter with external connection information. One example is `vrouter.json` in this repository. For more details about vRouter, check out https://wiki.onosproject.org/display/ONOS/vRouter.<br>Now run `vrouter.sh` script with the `routerController` IP address to bring up `ONOS-vRouter` container. The same command can be used to re-run the container.
 ```
