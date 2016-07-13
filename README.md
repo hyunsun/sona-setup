@@ -28,7 +28,7 @@ Total 4 nodes
 ```
 
 # vRouter ONOS setup
-**Quagga**<br>Modify `volumes/gateway/zebra.conf` and `volumes/gateway/bgpd.conf` as you want. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`.<br>Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and any MAC address. This MAC address will be used in `vrouter.json` later.
+**Quagga for vRouter**<br>Modify `volumes/gateway/zebra.conf` and `volumes/gateway/bgpd.conf` as you want. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`.<br>Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and any MAC address. This MAC address will be used in `vrouter.json` later.
 ```
 $ ./quagga.sh --name=gateway-01 --ip=172.18.0.254/24 --mac=fe:00:00:00:00:01
 ```
