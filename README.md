@@ -91,7 +91,7 @@ Table: ipv6
    Total: 0
 ```
 **Register internal network**<br>
-Now let's add routes for the internal network, `192.168.0.0/24` in this example. This network might be the `floating IP` range in Neutron data model.<br>First, define fake `host` and `interface` for the internal network gateway to the network config file, and push it to the `ONOS-vRouter` (or you can re-run `ONOS-vRouter`). The port number should equal to the one of `patch-rout` port. (Example `vrouter.json` already has the configuration and you don't need to do it again if it's already set correctly)
+Now let's add routes for the internal network, `192.168.0.0/24` in this example. This network might be the `floating IP` range in Neutron data model.<br>First, define fake `host` and `interface` for the internal network gateway to the network config file and re-run `ONOS-vRouter`. The port number should equal to the one of `patch-rout` port. (Example `vrouter.json` already has the configuration and you don't need to do it again if it's already set correctly)
 ```
 # vrouter.json
     "hosts" : {
@@ -114,10 +114,6 @@ Now let's add routes for the internal network, `192.168.0.0/24` in this example.
             ]
         }
 
-# push network config
-$ curl --user onos:rocks -X POST http://172.17.0.3:8181/onos/v1/network/configuration -d @vrouter.json
-
-# or simply re-run the container
 $ ./vrouter.sh 172.17.0.3
 
 onos> hosts
