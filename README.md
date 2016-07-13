@@ -7,7 +7,7 @@ SONA gateway node is composed of a couple of bridge controlled by `ONOS-SONA` an
 ![](https://66.media.tumblr.com/f41999bd5184bbdb437071981e0d6379/tumblr_oa7tlwI2nz1s0jpjfo1_1280.png)
 
 # SONA ONOS setup
-Prepare the network configuration file for SONA with the information about compute and gateway nodes. There is an example named with `sona.json` in this repository. Now activate SONA applications and push the network configuration file to running ONOS.<br>Note that `routerController` field will be used to bring up `vRouter ONOS` later. This address does not span gateway nodes, that is, you can use the same address in multiple gateway nodes.
+Prepare the network configuration file for SONA with the information about compute and gateway nodes. There is an example named with `sona.json` in this repository. Now activate SONA applications and push the network configuration file to running ONOS.<br>Note that `routerController` field will be used to bring up `ONOS-vRouter` later. This address does not span gateway nodes, that is, you can use the same address in multiple gateway nodes.
 ```
 # activate applications
 $ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.drivers/active
