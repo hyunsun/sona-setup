@@ -94,6 +94,17 @@ Now let's add routes for the internal network, `192.168.0.0/24` in this example.
             }
         }
     }
+    
+    "ports" : {
+        "of:00000000000000b1/1" : {
+            "interfaces" : [
+                {
+                    "name" : "b1-2",
+                    "ips"  : [ "192.168.0.254/24" ],
+                    "mac"  : "fe:00:00:00:00:01"
+                }
+            ]
+        }
 
 # push network config
 $ curl --user onos:rocks -X POST http://172.17.0.3:8181/onos/v1/network/configuration -d @vrouter.json
