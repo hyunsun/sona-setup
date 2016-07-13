@@ -17,7 +17,7 @@ $ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.on
 # push network config
 $ curl --user onos:rocks -X POST -H "Content-Type: application/json" http://onos_ip:8181/onos/v1/network/configuration/ -d @sona.json
 ```
-Check the nodes states are `COMPLETE`. Use `openstack-node-check` command for more detailed states of the node. Pushing network configuration triggers reinitialize the nodes. It's no harm to reinitialize COMPLETE state node. If you want to reinitialize a particular compute node, use `openstack-node-init` command with hostname.
+Check the nodes states are `COMPLETE`. Use `openstack-node-check` command for more detailed states of the node. Pushing network configuration triggers reinitialization of the nodes. It's no harm to reinitialize COMPLETE state node. If you want to reinitialize a particular compute node, use `openstack-node-init` command with hostname.
 ```
 onos> openstack-nodes
 hostname=compute-01, type=COMPUTE, managementIp=10.203.25.244, dataIp=10.134.34.222, intBridge=of:00000000000000a1, routerBridge=Optional.empty init=COMPLETE
