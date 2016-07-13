@@ -60,8 +60,8 @@ id=of:00000000000000b1, available=true, role=MASTER, type=SWITCH, mfr=Nicira, In
 ```
 If any port number does not match to the ones in `vrouter.json`, modify the config file with the correct port numbers.
 * port number of `quagga` -> `controlPlaneConnectPoint` of router config
-* port number of `quagga-router` -> `ports` of interface with `172.18.0.254/24` IP address
-* port number of `veth1` (set via `uplinkPort` field in `sona.json`) -> `ports` of interface with `192.168.0.254/24`
+* port number of `quagga-router` or `veth1`(uplink in `sona.json` if you have external router) -> `ports` of interface with `172.18.0.254/24` IP address
+* port number of `patch-rout` -> `ports` of interface with `192.168.0.254/24`
 Once you modify `vrouter.json`, re-run the ONOS-vRouter.
 ```
 $ vrouter.sh 172.17.0.3
