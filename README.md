@@ -28,32 +28,40 @@ Total 4 nodes
 ```
 
 # vRouter ONOS setup
-**Quagga**<br>Modify `quagga/zebra.conf` and `quagga/bgpd.conf` as you want. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`.<br>Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and any MAC address. This MAC address will be used in `vrouter.json` later.
+**Quagga**<br>Modify `volumes/gateway/zebra.conf` and `volumes/gateway/bgpd.conf` as you want. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`.<br>Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and any MAC address. This MAC address will be used in `vrouter.json` later.
 ```
 $ ./quagga.sh --name=gateway-01 --ip=172.18.0.254/24 --mac=fe:00:00:00:00:01
 ```
 If you check the result of `ovs-vsctl show`, there should be a new port named `quagga` on `br-router` bridge.
+<br><br>
+**External Router**<br>
+If there's no external router in your setup, add another quagga container in ecah gateway node, which acts as an external router.<br>Modify `volumes/router/zebra.conf` and `volumes/router/bgpd.conf` as you want, and use the same command above but with additional argument `--external-router` to bring up the router container.
+```
+$ ./quagga.sh --name=router-01 --ip=172.18.0.1/24 --mac=fa:00:00:00:00:01 --external-router
+```
 <br><br>
 **vRouter ONOS**<br>
 Prepare network configuration file for vRouter with external connection information. One example is `vrouter.json` in this repository. For more details about vRouter, check out https://wiki.onosproject.org/display/ONOS/vRouter.<br>Now run `vrouter.sh` script with the `routerController` IP address to bring up `ONOS-vRouter` container. The same command can be used to re-run the container.
 ```
 $ vrouter.sh 172.17.0.3
 ```
-Check `ports` and `hosts`.
+Check `ports`.
 ```
 $ ssh -p 8101 karaf@172.17.0.3
 # password is karaf
 
 onos> ports
-id=of:00000000000000b1, available=true, role=MASTER, type=SWITCH, mfr=Nicira, Inc., hw=Open vSwitch, sw=2.3.0, serial=None, driver=softrouter, channelId=172.17.0.1:56160, managementAddress=172.17.0.1, name=of:00000000000000b1, protocol=OF_13
+id=of:00000000000000b1, available=true, role=MASTER, type=SWITCH, mfr=Nicira, Inc., hw=Open vSwitch, sw=2.3.0, serial=None, driver=softrouter, channelId=172.17.0.1:58292, managementAddress=172.17.0.1, name=of:00000000000000b1, protocol=OF_13
   port=local, state=disabled, type=copper, speed=0 , portName=br-router, portMac=e6:a0:79:f9:d1:4a
   port=1, state=enabled, type=copper, speed=0 , portName=patch-rout, portMac=fe:da:85:15:b1:bf
   port=2, state=enabled, type=copper, speed=10000 , portName=veth1, portMac=a2:fe:d4:6a:e9:c1
-  port=4, state=enabled, type=copper, speed=10000 , portName=quagga, portMac=5e:ba:a0:ae:f9:98
+  port=24, state=enabled, type=copper, speed=10000 , portName=quagga, portMac=06:96:1b:36:32:77
+  port=25, state=enabled, type=copper, speed=10000 , portName=quagga-router, portMac=ea:1e:71:d1:fd:81
 ```
 If any port number does not match to the ones in `vrouter.json`, modify the config file with the correct port numbers.
 * port number of `quagga` -> `controlPlaneConnectPoint` of router config
-* port number of `veth1` (set via `uplinkPort` field in `sona.json`) -> listed in `ports`
+* port number of `quagga-router` -> `ports` of interface with `172.18.0.254/24` IP address
+* port number of `veth1` (set via `uplinkPort` field in `sona.json`) -> `ports` of interface with `192.168.0.254/24`
 Once you modify `vrouter.json`, re-run the ONOS-vRouter.
 ```
 $ vrouter.sh 172.17.0.3
@@ -83,7 +91,7 @@ Table: ipv6
    Total: 0
 ```
 **Register internal network**<br>
-Now let's add routes for the internal network, `192.168.0.0/24` in this example. This network might be the `floating IP` range in Neutron data model.<br>First, define fake host and interface for the internal network gateway to the network config file, and push it to the `ONOS-vRouter` (or you can re-run `ONOS-vRouter`). The port number should equal to the port number of `patch-rout`. (You don't need to do it again if the host already exists)
+Now let's add routes for the internal network, `192.168.0.0/24` in this example. This network might be the `floating IP` range in Neutron data model.<br>First, define fake `host` and `interface` for the internal network gateway to the network config file, and push it to the `ONOS-vRouter` (or you can re-run `ONOS-vRouter`). The port number should equal to the one of `patch-rout` port. (Example `vrouter.json` already has the configuration and you don't need to do it again if it's already set correctly)
 ```
 # vrouter.json
     "hosts" : {
