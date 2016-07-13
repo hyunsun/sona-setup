@@ -28,14 +28,14 @@ Total 4 nodes
 ```
 
 # vRouter ONOS setup
-**Quagga**<br>Modify `quagga/zebra.conf` and `quagga/bgpd.conf`. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`.<br>Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and any MAC address. This MAC address will be used in `vrouter.json` later.
+**Quagga**<br>Modify `quagga/zebra.conf` and `quagga/bgpd.conf` as you want. Note that `fpm connection ip` in `zebra.conf` should be the same with `routerController`.<br>Run Quagga container with the IP address, which equals to `router-id` in `bgpd.conf` and any MAC address. This MAC address will be used in `vrouter.json` later.
 ```
 $ ./quagga.sh --name=gateway-01 --ip=172.18.0.254/24 --mac=fe:00:00:00:00:01
 ```
 If you check the result of `ovs-vsctl show`, there should be a new port named `quagga` on `br-router` bridge.
 <br><br>
 **vRouter ONOS**<br>
-Prepare network configuration file for vRouter with external connection information. One example is `vrouter.json` in this repository. For more details about vRouter, check out https://wiki.onosproject.org/display/ONOS/vRouter.<br>Now run `vrouter.sh` script with the `routerController` IP address. The same command can be used to re-run the container.
+Prepare network configuration file for vRouter with external connection information. One example is `vrouter.json` in this repository. For more details about vRouter, check out https://wiki.onosproject.org/display/ONOS/vRouter.<br>Now run `vrouter.sh` script with the `routerController` IP address to bring up `ONOS-vRouter` container. The same command can be used to re-run the container.
 ```
 $ vrouter.sh 172.17.0.3
 ```
