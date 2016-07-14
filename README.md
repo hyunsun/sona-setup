@@ -1,5 +1,5 @@
 # SONA
-SONA is a project implements OpenStack Neutron ML2 mechanism driver and L3 service plugin with ONOS(onosproject.org). See https://wiki.onosproject.org/display/ONOS/DC+Network+Virtualization for the details.
+SONA is a project implements OpenStack Neutron ML2 mechanism driver and L3 service plugin with ONOS(onosproject.org). See https://wiki.onosproject.org/display/ONOS/SONA%3A+DC+Network+Virtualization for the details.
 Here it describes how to set up a gateway node for SONA. 
 
 # SONA Gateway Node
