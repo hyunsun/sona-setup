@@ -9,14 +9,14 @@
     "apps" : {
         "org.onosproject.router" : {
             "router" : {
-                "controlPlaneConnectPoint" : "of:00000000000000b1/3",
+                "controlPlaneConnectPoint" : "of:00000000000000b1/9",
                 "ospfEnabled" : "true",
                 "interfaces" : [ "b1-1", "b1-2" ]
             }
         }
     },
     "ports" : {
-        "of:00000000000000b1/4" : {
+        "of:00000000000000b1/10" : {
             "interfaces" : [
                 {
                     "name" : "b1-1",
@@ -25,7 +25,7 @@
                 }
             ]
         },
-        "of:00000000000000b1/4" : {
+        "of:00000000000000b1/1" : {
             "interfaces" : [
                 {
                     "name" : "b1-2",
