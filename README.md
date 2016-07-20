@@ -48,7 +48,7 @@ $ ./quagga.sh --name=router-01 --ip=172.18.0.1/24 --mac=fa:00:00:00:00:01 --exte
 
 <br>Check `ports` from vRouter-ONOS.
 ```
-$ ssh -p 8101 karaf@172.17.0.3
+$ ssh -p 8101 karaf@172.17.0.2
 # password is karaf
 
 onos> ports
