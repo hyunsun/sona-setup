@@ -33,7 +33,7 @@
                                 "integrationBridge" : "of:00000000000000a3",
                                 "routerBridge" : "of:00000000000000b1",
                                 "uplinkPort" : "veth1",
-                                "routerController" : "172.17.0.3"
+                                "routerController" : "172.17.0.2"
                         },
                         {
                                 "hostname" : "gateway-02",
@@ -43,7 +43,7 @@
                                 "integrationBridge" : "of:00000000000000a4",
                                 "routerBridge" : "of:00000000000000b2",
                                 "uplinkPort" : "veth1",
-                                "routerController" : "172.17.0.3"
+                                "routerController" : "172.17.0.2"
                         }
                   ]
              }
