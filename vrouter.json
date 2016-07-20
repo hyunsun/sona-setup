@@ -9,14 +9,14 @@
     "apps" : {
         "org.onosproject.router" : {
             "router" : {
-                "controlPlaneConnectPoint" : "of:00000000000000b1/2",
+                "controlPlaneConnectPoint" : "of:00000000000000b1/3",
                 "ospfEnabled" : "true",
                 "interfaces" : [ "b1-1", "b1-2" ]
             }
         }
     },
     "ports" : {
-        "of:00000000000000b1/3" : {
+        "of:00000000000000b1/4" : {
             "interfaces" : [
                 {
                     "name" : "b1-1",
@@ -25,11 +25,11 @@
                 }
             ]
         },
-        "of:00000000000000b1/1" : {
+        "of:00000000000000b1/4" : {
             "interfaces" : [
                 {
                     "name" : "b1-2",
-                    "ips"  : [ "192.168.0.254/24" ],
+                    "ips"  : [ "172.27.0.254/24" ],
                     "mac"  : "fe:00:00:00:00:01"
                 }
             ]
@@ -38,7 +38,7 @@
     "hosts" : {
         "fe:00:00:00:00:02/-1" : {
             "basic": {
-                "ips": ["192.168.0.1"],
+                "ips": ["172.27.0.1"],
                 "location": "of:00000000000000b1/1"
             }
         }

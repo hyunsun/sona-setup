@@ -13,7 +13,7 @@ sudo docker pull onosproject/onos:1.6
 
 if [ -z "$onos" ]; then
     sudo docker run -t -d --name onos-vrouter onosproject/onos:1.6
-    onos=$(sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' 'onos')
+    onos=$(sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' 'onos-vrouter')
 else
     sudo docker run -t -d --net=none --name onos-vrouter onosproject/onos:1.6
     sudo ~/docker-quagga/pipework docker0 -i eth0 onos-vrouter $1/24
