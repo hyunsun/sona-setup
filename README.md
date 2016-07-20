@@ -63,7 +63,7 @@ If any port number does not match to the ones in `vrouter.json`, modify the conf
 * port number of `quagga` -> `controlPlaneConnectPoint` of router config
 * port number of `quagga-router` or `veth1`(uplink in `sona.json` if you have external router) -> `ports` of interface with `172.18.0.254/24` IP address.
 * port number of `patch-rout` -> `ports` of interface with `172.27.0.254/24`, explain this interface later. Same port number goes to the `hosts` location with IP `172.27.0.1`.
-Once you modify `vrouter.json`, re-run the ONOS-vRouter.
+<br>Once you modify `vrouter.json`, re-run the ONOS-vRouter.
 ```
 $ vrouter.sh 172.17.0.2
 ```
