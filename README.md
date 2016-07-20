@@ -30,7 +30,7 @@ Total 4 nodes
 
 # vRouter ONOS setup
 **vRouter ONOS**<br>
-Prepare network configuration file for vRouter with external connection information. One example is `vrouter.json` in this repository. For more details about vRouter, check out https://wiki.onosproject.org/display/ONOS/vRouter.<br>Now run `vrouter.sh` script with the `routerController` IP address to bring up `ONOS-vRouter` container. The same command can be used to re-run the container.
+Prepare network configuration file for vRouter with external connection information. One example is `vrouter.json` in this repository. Modify the file as you want. For more details about vRouter, check out https://wiki.onosproject.org/display/ONOS/vRouter.<br>Now run `vrouter.sh` script with the `routerController` IP address to bring up `ONOS-vRouter` container. The same command can be used to re-run the container.
 ```
 $ vrouter.sh 172.17.0.2
 ```
