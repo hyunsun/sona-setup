@@ -11,7 +11,7 @@ Prepare the network configuration file for SONA with the information about compu
 ```
 # activate applications
 $ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.drivers/active
-$ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.openflow/active
+$ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.openflow-base/active
 $ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.openstackswitching/active
 $ curl --user onos:rocks -X POST http://onos_ip:8181/onos/v1/applications/org.onosproject.openstackrouting/active
 
