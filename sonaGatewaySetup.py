@@ -1,5 +1,6 @@
 #!usr/bin/python
 import json
+import ipaddress
 from oslo_config import cfg
 
 class SonaGatewaySetup:
@@ -11,7 +12,6 @@ class SonaGatewaySetup:
         default_group = cfg.OptGroup(name='DEFAULT')
         default_conf = [cfg.StrOpt('routerBridge'),
             cfg.StrOpt('floatingCidr'),
-            cfg.StrOpt('dummyHostIp'),
             cfg.StrOpt('quaggaMac'),
             cfg.StrOpt('quaggaIp'),
             cfg.StrOpt('uplinkPortNum'),
@@ -26,8 +26,7 @@ class SonaGatewaySetup:
         CONF(default_config_files=[CONFIG_FILE])
     
         self.routerBridge = CONF.DEFAULT.routerBridge
-        self.floatingCidr = CONF.DEFAULT.floatingCidr
-        self.dummyHostIp = CONF.DEFAULT.dummyHostIp
+        self.floatingCidr = CONF.DEFAULT.floatingCidr.split(",")
         self.quaggaMac = CONF.DEFAULT.quaggaMac
         self.quaggaIp = CONF.DEFAULT.quaggaIp
         self.uplinkPortNum = CONF.DEFAULT.uplinkPortNum
@@ -73,8 +72,8 @@ class SonaGatewaySetup:
     
     # hosts
         ipList = list()
-        ipList.append(self.dummyHostIp)
-    
+        for ip in self.floatingCidr:
+            ipList.append(str(ipaddress.ip_network(unicode(ip))[1]))
         basicDict = dict()
         basicDict["ips"] = ipList
         basicDict["location"] = self.routerBridge + "/" + str(portNumPatchRout)
@@ -89,7 +88,9 @@ class SonaGatewaySetup:
     
     # ports
         ipList = list()
-        ipList.append("172.27.0.254/24")
+        for ip in self.floatingCidr:
+            ipList.append(str(ipaddress.ip_network(unicode(ip))[-2]) + "/" + ip.split("/")[1])
+
         interfaceDict = dict()
         interfaceDict["ips"] = ipList
         interfaceDict["mac"] = self.quaggaMac
