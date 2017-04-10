@@ -137,8 +137,10 @@ class SonaGatewaySetup:
         f.write("  neighbor %s ebgp-multihop\n" %self.bgpNeighborIp.split("/")[0])
         f.write("  neighbor %s timers connect 5\n" %self.bgpNeighborIp.split("/")[0])
         f.write("  neighbor %s advertisement-interval 5\n" %self.bgpNeighborIp.split("/")[0])
-        f.write("  network %s\n\n" %self.floatingCidr)
-        f.write("log file /var/log/quagga/bgpd.log\n")
+        for ipRange in self.floatingCidr:
+            f.write("  network %s\n" %ipRange)
+
+        f.write("\nlog file /var/log/quagga/bgpd.log\n")
         f.close()
 
     def createZebraConf(self, onosIp):
