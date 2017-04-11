@@ -1,46 +1,57 @@
 {
-    "devices" : {
-        "of:00000000000000b1" : {
-            "basic" : {
-                "driver" : "softrouter"
+    "apps": {
+        "org.onosproject.router": {
+            "router": {
+                "controlPlaneConnectPoint": "of:00000000000000b1/2",
+                "interfaces": [
+                    "b1-1",
+                    "b1-2"
+                ],
+                "ospfEnabled": "true"
             }
         }
     },
-    "apps" : {
-        "org.onosproject.router" : {
-            "router" : {
-                "controlPlaneConnectPoint" : "of:00000000000000b1/9",
-                "ospfEnabled" : "true",
-                "interfaces" : [ "b1-1", "b1-2" ]
+    "devices": {
+        "of:00000000000000b1": {
+            "basic": {
+                "driver": "softrouter"
             }
         }
     },
-    "ports" : {
-        "of:00000000000000b1/10" : {
-            "interfaces" : [
+    "hosts": {
+        "fe:00:00:00:00:02/-1": {
+            "basic": {
+                "ips": [
+                    "172.27.0.1",
+                    "172.28.0.1"
+                ],
+                "location": "of:00000000000000b1/1"
+            }
+        }
+    },
+    "ports": {
+        "of:00000000000000b1/1": {
+            "interfaces": [
                 {
-                    "name" : "b1-1",
-                    "ips"  : [ "172.18.0.254/30" ],
-                    "mac"  : "fe:00:00:00:00:01"
+                    "ips": [
+                        "172.27.0.254/24",
+                        "172.28.0.254/24"
+                    ],
+                    "mac": "fe:00:00:00:00:01",
+                    "name": "b1-2"
                 }
             ]
         },
-        "of:00000000000000b1/1" : {
-            "interfaces" : [
+        "of:00000000000000b1/3": {
+            "interfaces": [
                 {
-                    "name" : "b1-2",
-                    "ips"  : [ "172.27.0.254/24" ],
-                    "mac"  : "fe:00:00:00:00:01"
+                    "ips": [
+                        "172.18.0.254/30"
+                    ],
+                    "mac": "fe:00:00:00:00:01",
+                    "name": "b1-1"
                 }
             ]
-        }
-    },
-    "hosts" : {
-        "fe:00:00:00:00:02/-1" : {
-            "basic": {
-                "ips": ["172.27.0.1"],
-                "location": "of:00000000000000b1/1"
-            }
         }
     }
 }
